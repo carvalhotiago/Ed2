@@ -18,27 +18,30 @@ ListaEncadeada::~ListaEncadeada() {
     }
 }
 
-void ListaEncadeada::Insere(int valor)
+/// <summary>
+/// Essa função retorna true quando há colisão (quando não é a primeira inserção na lista)
+/// </summary>
+/// <param name="valor"></param>
+/// <returns></returns>
+bool ListaEncadeada::Insere(int valor)
 {
-    numeroDeComparacoes++;
     if (this->primeiro == NULL) {
         No* p = new No();
         p->SetValor(valor);
         p->SetProx(NULL);
         this->primeiro = p;
+        return false;
     }
     else {
         No* aux = primeiro;
-        while (aux->GetProx() != NULL) {
+        while (aux->GetProx() != NULL)
             aux = aux->GetProx();
-            numeroDeComparacoes++;
-        }
-        numeroDeComparacoes++;
 
         No* q = new No();
         q->SetValor(valor);
         q->SetProx(NULL);
         aux->SetProx(q);
+        return true;
     }
 }
 

@@ -5,7 +5,7 @@ class ListaEncadeada
 public:
 	ListaEncadeada();
 	~ListaEncadeada();
-	void Insere(int valor);
+	bool Insere(int valor);
 	int numeroDeComparacoes = 0;
 	void Imprimir();
 	No* GetNoByData(int data);

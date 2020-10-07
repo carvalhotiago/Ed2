@@ -28,7 +28,8 @@ void DivisionHashing::Destroy(int m)
 void DivisionHashing::Insert(int key, int data)
 {
 	int hashValue = HashFunction(key);
-	hashTable[hashValue]->Insere(data);
+	if (hashTable[hashValue]->Insere(data))
+		numeroDeColisoes++;
 }
 
 No* DivisionHashing::Lookup(int key, int data)
@@ -37,3 +38,7 @@ No* DivisionHashing::Lookup(int key, int data)
 	return hashTable[hashValue]->GetNoByData(data); //returns pointer to node containing the data or NULL
 }
 
+int DivisionHashing::GetNumeroDeColisoes()
+{
+	return this->numeroDeColisoes;
+}

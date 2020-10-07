@@ -3,9 +3,11 @@
 
 int MultiplicationHashing::HashFunction(int key)
 {
-	const float a = 0.618;	//(sqrt(5) - 1)/2
-	float aux = fmod(key * a, 1);
-	return floor(this->tableSize * aux);
+	const float a = (sqrt(5)-1)/2;	//(sqrt(5) - 1)/2
+	double ka = (double)key * a;
+	float aux = fmod(ka, 1);
+	int hash = floor(this->tableSize * aux);
+	return hash;
 }
 
 void MultiplicationHashing::Create(int m)
@@ -31,7 +33,8 @@ void MultiplicationHashing::Destroy(int m)
 void MultiplicationHashing::Insert(int key, int data)
 {
 	int hashValue = HashFunction(key);
-	hashTable[hashValue]->Insere(data);
+	if (hashTable[hashValue]->Insere(data))
+		numeroDeColisoes++;
 }
 
 No* MultiplicationHashing::Lookup(int key, int data)
@@ -40,3 +43,7 @@ No* MultiplicationHashing::Lookup(int key, int data)
 	return hashTable[hashValue]->GetNoByData(data); //returns pointer to node containing the data (or NULL)
 }
 
+int MultiplicationHashing::GetNumeroDeColisoes()
+{
+	return this->numeroDeColisoes;
+}

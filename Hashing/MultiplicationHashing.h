@@ -14,4 +14,5 @@ public:
 	No* Lookup(int key, int data);
 	void Destroy(int m);
 	int tableSize;
+	int GetNumeroDeColisoes();
 };

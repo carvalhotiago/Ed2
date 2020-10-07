@@ -2,7 +2,8 @@
 
 int KnuthVariantHashing::HashFunction(int key)
 {
-	return (key*(key+3)) % this->tableSize;
+	int hash = (key*(key+3)) % this->tableSize;
+	return hash;
 }
 
 void KnuthVariantHashing::Create(int m)
@@ -28,7 +29,8 @@ void KnuthVariantHashing::Destroy(int m)
 void KnuthVariantHashing::Insert(int key, int data)
 {
 	int hashValue = HashFunction(key);
-	hashTable[hashValue]->Insere(data);
+	if (hashTable[hashValue]->Insere(data))
+		numeroDeColisoes++;
 }
 
 No* KnuthVariantHashing::Lookup(int key, int data)
@@ -37,3 +39,7 @@ No* KnuthVariantHashing::Lookup(int key, int data)
 	return hashTable[hashValue]->GetNoByData(data); //returns pointer to node containing the data or NULL
 }
 
+int KnuthVariantHashing::GetNumeroDeColisoes()
+{
+	return this->numeroDeColisoes;
+}
